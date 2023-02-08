@@ -1,0 +1,2 @@
+# pydice
+Python dice generator
