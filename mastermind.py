@@ -21,9 +21,10 @@ Can you solve the puzzle?""")
 
 colors = ["Red", "Green", "Blue", "Pink", "Purple", "Yellow"]
 code = random.choices(colors, k=4)
-guesses = list()
+print(code)
 attempts = 11
 while attempts > 0:
+    guesses = list()
     for i in range(4):
         guess = str(input("Type each color guess in order one at a time here: "))
         if guess != "Red" and guess != "Green" and guess != "Blue" and guess != "Pink" and guess != "Purple" and guess != "Yellow":
@@ -31,11 +32,12 @@ while attempts > 0:
         guesses.append(guess.capitalize())
     attempts -= 1
     markers = []
-    markin = 0
-    for i in guesses:
+    markindex = 0
+    for it in guesses:
+        print(it)
         while markin < 4:
-            if i in code:
-                if i == code[markin]:
+            if it in code:
+                if it == code[markindex]:
                     markers.append("White")
                 else:
                     markers.append("Black")
