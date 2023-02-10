@@ -35,7 +35,7 @@ while attempts > 0:
     markindex = 0
     for it in guesses:
         print(it)
-        while markin < 4:
+        while markindex < 4:
             if it in code:
                 if it == code[markindex]:
                     markers.append("White")
@@ -43,7 +43,7 @@ while attempts > 0:
                     markers.append("Black")
             else:
                 markers.append(" ")
-            markin += 1
+            markindex += 1
     display = np.array([guesses, markers])
     print(display)
     
