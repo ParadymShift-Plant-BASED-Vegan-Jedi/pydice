@@ -24,26 +24,26 @@ code = random.choices(colors, k=4)
 print(code)
 attempts = 11
 while attempts > 0:
-    guesses = list()
-    for i in range(4):
-        guess = str(input("Type each color guess in order one at a time here: "))
-        if guess != "Red" and guess != "Green" and guess != "Blue" and guess != "Pink" and guess != "Purple" and guess != "Yellow":
+    guesses = []
+    while len(guesses) != 4:
+        guess = input("Type each color guess in order one at a time here: ")
+        if guess.capitalize() not in colors:
             print("Invalid entry. Please restart the game and try again!")
+            continue
         guesses.append(guess.capitalize())
     attempts -= 1
     markers = []
-    markindex = 0
+    index = 0
     for it in guesses:
-        print(it)
-        while markindex < 4:
-            if it in code:
-                if it == code[markindex]:
-                    markers.append("White")
-                else:
-                    markers.append("Black")
+        if it in code:
+            if it.capitalize() == code[index]:
+                markers.append("White")
             else:
-                markers.append(" ")
-            markindex += 1
+                markers.append("Black")
+        else:
+            markers.append(" ")
+        index += 1
+            
     display = np.array([guesses, markers])
     print(display)
     
