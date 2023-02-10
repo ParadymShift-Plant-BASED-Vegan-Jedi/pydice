@@ -46,4 +46,5 @@ while attempts > 0:
             
     display = np.array([guesses, markers])
     print(display)
+print("Sorry, you ran out of guesses and lost.")
     
