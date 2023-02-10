@@ -28,7 +28,7 @@ while attempts > 0:
     while len(guesses) != 4:
         guess = input("Type each color guess in order one at a time here: ")
         if guess.capitalize() not in colors:
-            print("Invalid entry. Please restart the game and try again!")
+            print("Invalid entry. Please try again!")
             continue
         guesses.append(guess.capitalize())
     attempts -= 1
