@@ -46,5 +46,10 @@ while attempts > 0:
             
     display = np.array([guesses, markers])
     print(display)
-print("Sorry, you ran out of guesses and lost.")
+    if guesses == code:
+        print("Congratulations! You won! Restart the program to play again :)")
+        break
+    if attempts == 0:
+        print("Sorry, you ran out of guesses and lost.")
+
     
