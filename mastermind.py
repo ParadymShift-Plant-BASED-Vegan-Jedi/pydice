@@ -21,7 +21,6 @@ Can you solve the puzzle?""")
 
 colors = ["Red", "Green", "Blue", "Pink", "Purple", "Yellow"]
 code = random.choices(colors, k=4)
-print(code)
 attempts = 11
 while attempts > 0:
     guesses = []
