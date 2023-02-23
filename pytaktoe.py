@@ -113,25 +113,43 @@ if frst == True:
     else:
         print("Error. Invalid input. Please restart the game and try again!")
 else:
+    print("The computer makes the first move...")
+    brchc1 = random.randint(1,3)
+    bcchc1 = random.randint(0,2)
+    if brchc1 == 1:
+        topr[bcchc1] = "O"
+    elif brchc1 == 2:
+        midr[bcchc1] == "O"
+    elif brchc1 == 3:
+        botr[bcchc1] = "O"
+    else:
+        print("Computing Error. Please restart the game and try again")
+            
+display_board()
+    
+time.sleep(3)
+
+def comp_move():
     print("The computer makes a move...")
     while True:
         brchc1 = random.randint(1,3)
         bcchc1 = random.randint(0,2)
         if brchc1 == 1:
+            if topr[bcchc1] == "X" or topr[bcchc1] == "O":
+                continue
             topr[bcchc1] = "O"
             break
         elif brchc1 == 2:
-            midr[bcchc1] == "O"
+            if midr[bcchc1] == "X" or midr[bcchc1] == "O":
+                continue
+            midr[bcchc1] = "O"
             break
         elif brchc1 == 3:
+            if botr[bcchc1] == "X" or botr[bcchc1] == "O":
+                continue
             botr[bcchc1] = "O"
             break
-        else:
-            print("Computing Error. Please restart the game and try again")
-            
-display_board()
-    
-time.sleep(3)
+    display_board()
 
 def player_move():
     while True:
@@ -198,6 +216,7 @@ def player_move():
         else:
             print("Invalid Option: Please try again.")
         continue
+    display_board()
 
 def win_check():
     # Check for wins horizontally
@@ -217,7 +236,7 @@ def win_check():
     # Check for wins diagonally
     if topr[0] == "X" and midr[1] == "X" and botr[2] == "X":
         return True
-    elif topr[2] == "X" and midr[1] == "X" and botr[0] === "X":
+    elif topr[2] == "X" and midr[1] == "X" and botr[0] == "X":
         return True
     return False
 
@@ -239,11 +258,84 @@ def loss_check():
     # Check for losses diagonally
     if topr[0] == "O" and midr[1] == "O" and botr[2] == "O":
         return True
-    elif topr[2] == "O" and midr[1] == "O" and botr[0] === "O":
+    elif topr[2] == "O" and midr[1] == "O" and botr[0] == "O":
         return True
     return False
 
+# second move
+if frst == True:
+    comp_move()
+else:
+    player_move()
 
+display_board()
+
+# third move
+if frst == True:
+    player_move()
+else:
+    comp_move()
+    
+# fourth move
+if frst == True:
+    comp_move()
+else:
+    player_move()
+
+# fifth move
+if frst == True:
+    player_move()
+else:
+    comp_move()
+    
+if win_check() == True:
+    print("Congratulations! You won the game. Play again to win some more!")
+if loss_check() == True:
+    print("Unfortunately, you lost this game. Better luck next time!")
+
+if win_check() == False and loss_check() == False:
+    # sixth move
+    if frst == True:
+        comp_move()
+    else:
+        player_move()
+    if win_check == True:
+        print("Congratulations! You won the game. Play again to win some more!")
+    if loss_check == True:
+        print("Unfortunately, you lost this game. Better luck next time!")
+    if win_check() == False and loss_check() == False:
+        # seventh move
+        if frst == True:
+            player_move()
+        else:
+            comp_move()
+        if win_check() == True:
+            print("Congratulations! You won the game. Play again to win some more!")
+        if loss_check() == True:
+            print("Unfortunately, you lost this game. Better luck next time!")
+        if win_check() == False and loss_check() == False:
+            # eighth move
+            if frst == True:
+                comp_move()
+            else: 
+                player_move()
+            if win_check() == True:
+                print("Congratulations! You won the game. Play again to win some more!")
+            if loss_check() == True:
+                print("Unfortunately, you lost this game. Better luck next time!")
+            if win_check() == False and loss_check() == False:
+                # last move
+                if frst == True:
+                    player_move()
+                else:
+                    comp_move()
+                if win_check() == True:
+                    print("Congratulations! You won the game! Play again to win some more!")
+                if loss_check() == True:
+                    print("Unfortunately, you lost this game. Better luck next time!")
+                if win_check() == False and loss_check() == False:
+                    print("It's a tie game. Play again to find out who's the better player!")
+                        
                                                       
         
             
