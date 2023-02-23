@@ -45,4 +45,4 @@ def get_response(user_input):
     return response
 
 While True:
-    print('Chatbot: ' + get_response(input('You: ')))
+    print('Chatbot: ' + get_response(input('Your input: ')))
