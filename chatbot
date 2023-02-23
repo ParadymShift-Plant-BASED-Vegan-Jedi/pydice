@@ -1,0 +1,40 @@
+import random
+
+# Define some responses
+responses = {
+    "greeting": ["Hello!", "Hi there!", "Hey!"],
+    "introduction": ["My name is Chatbot. What's yours?", "I'm Chatbot. What should I call you?"],
+    "goodbye": ["Goodbye!", "Bye!", "See you later!"],
+    "thanks": ["You're welcome!", "No problem.", "Anytime!"],
+    "name": ["My name is Chatbot.", "You can call me Chatbot."],
+    "help: ["What do you need help with?", "How can I help you?"],
+    "unknown": ["I'm sorry, I don't understand.", "Can you please rephrase that?", "I'm not sure what you mean.", "I'm sorry, but my responses are limited. Please try again."]
+}
+
+# Define the main function
+def chatbot():
+    # Greet the user
+    print(random.choice(responses["greeting"]))
+
+    # Ask for the user's name
+    print(random.choice(responses["introduction"]))
+    name = input()
+
+    # Respond to the user
+    print("Nice to meet you, " + name + "!")
+    while True:
+        message = input().lower()
+        if "goodbye" in message:
+            print(random.choice(responses["goodbye"]))
+            break
+        elif "thanks" in message:
+            print(random.choice(responses["thanks"]))
+        elif "name" in message:
+            print(random.choice(responses["name"]))
+        elif "help" in message:
+            print(random.choice(responses["help"]))
+        else:
+            print(random.choice(responses["unknown"]))
+
+# Start the chatbot
+chatbot()
