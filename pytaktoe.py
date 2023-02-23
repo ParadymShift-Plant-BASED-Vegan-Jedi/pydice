@@ -153,7 +153,7 @@ def comp_move():
 
 def player_move():
     while True:
-        print("It's your turn. Where would you like your next move to be? Type your two letters into the console: ")
+        chc1 = input("It's your turn. Where would you like your next move to be? Type your two letters into the console: ")
         chc1 = chc1.upper()
         if chc1 in options:
             if chc1 == "TL":
