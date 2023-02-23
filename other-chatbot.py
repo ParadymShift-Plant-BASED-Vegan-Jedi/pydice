@@ -35,7 +35,7 @@ def check_all_messages(message):
     best_match = max(highest_prob_list, key=highest_prob_list.get)
     # print(highest_prob_list)
              
-    return long.unknown()
+    return long.unknown() if highest_prob_list[best_match] < 1 else best_match
 
 def get_response(user_input):
     split_message = re.split(r'\s+|[,;?!.-]\s*', user_input.lower())
@@ -43,4 +43,4 @@ def get_response(user_input):
     return response
 
 While True:
-    
+    print('Chatbot: ' + get_response(input('You: ')))
