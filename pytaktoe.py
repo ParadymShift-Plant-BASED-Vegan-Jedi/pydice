@@ -1,5 +1,6 @@
 import time
 import random
+import numpy as np
 
 print("""Welcome to Tik Tak Toe! 
 
@@ -67,73 +68,182 @@ else:
     print("Unfortunately you guessed incorrectly and get to go second.")
     frst = False
 
-print(""" | |
+topr = [" ", " ", " "]
+midr = [" ", " ", " "]
+botr = [" ", " ", " "]
+
+def display_board():
+    print(f"""{topr[0]}|{topr[1]}|{topr[2]}
 -+-+-
- | |
+{midr[0]}|{midr[1]}|{midr[2]}
 -+-+-
- | | """)
+{botr[0]}|{botr[1]}|{botr[2]}""")
+ 
+display_board()
+
+options = ["TL", "TM", "TR", "ML", "MM", "MR", "BL", "BM", "BR"]
 
 if frst == True:
-    chc1 = input("Where would you like to make your first move? Type your two letters into the console: ")
-    chc1 = chc1.upper()
+    while True:
+        chc1 = input("Where would you like to make your first move? Type your two letters into the console: ")
+        chc1 = chc1.upper()
+        if chc1 in options:
+            break
+        else:
+            print("Invalid Option: Please try again.")
+            continue
     if chc1 == "TL":
-        print("""X| |
--+-+-
- | |
--+-+-
- | | """)
+        topr[0] = "X"
     elif chc1 == "TM":
-        print(""" |X|
--+-+-
- | |
--+-+-
- | | """)
+        topr[1] = "X"
     elif chc1 == "TR":
-        print(""" | |X
--+-+-
- | |
--+-+-
- | | """)
+        topr[2] = "X"
     elif chc1 == "ML":
-        print(""" | |
--+-+-
-X| |
--+-+-
- | | """)
+        midr[0] = "X"
     elif chc1 == "MM":
-        print(""" | |
--+-+-
- |X|
--+-+-
- | | """)
+        midr[1] = "X"
     elif chc1 == "MR":
-        print(""" | |
--+-+-
- | |X
--+-+-
- | | """)
+        midr[2] = "X"
     elif chc1 == "BL":
-        print(""" | |
--+-+-
- | |
--+-+-
-X| | """)
+        botr[0] = "X"
     elif chc1 == "BM":
-        print(""" | |
--+-+-
- | |
--+-+-
- |X| """)
+        botr[1] = "X"
     elif chc1 == "BR":
-        print(""" | |
--+-+-
- | |
--+-+-
- | |X""")
+        botr [2] = "X"
     else:
-        print("Invalid option. Please restart the game and try again!")
-        
+        print("Error. Invalid input. Please restart the game and try again!")
+else:
+    print("The computer makes a move...")
+    while True:
+        brchc1 = random.randint(1,3)
+        bcchc1 = random.randint(0,2)
+        if brchc1 == 1:
+            topr[bcchc1] = "O"
+            break
+        elif brchc1 == 2:
+            midr[bcchc1] == "O"
+            break
+        elif brchc1 == 3:
+            botr[bcchc1] = "O"
+            break
+        else:
+            print("Computing Error. Please restart the game and try again")
+            
+display_board()
     
+time.sleep(3)
+
+def player_move():
+    while True:
+        print("It's your turn. Where would you like your next move to be? Type your two letters into the console: ")
+        chc1 = chc1.upper()
+        if chc1 in options:
+            if chc1 == "TL":
+                if topr[0] == "X" or topr[0] == "O":
+                    print("That space is already taken! Please try again.")
+                    continue
+                topr[0] = "X"
+                break
+            elif chc1 == "TM":
+                if topr[1] == "X" or topr[1] == "O":
+                    print("That space is already taken! Please try again.")
+                    continue
+                topr[1] = "X"
+                break
+            elif chc1 == "TR":
+                if topr[2] == "X" or topr[2] == "O":
+                    print("That space is already taken! Please try again.")
+                    continue
+                topr[2] = "X"
+                break
+            elif chc1 == "ML":
+                if midr[0] == "X" or midr[0] == "O":
+                    print("That space is already taken! Please try again.")
+                    continue
+                midr[0] = "X"
+                break
+            elif chc1 == "MM":
+                if midr[1] == "X" or midr[1] == "O":
+                    print("That space is already taken! Please try again.")
+                    continue
+                midr[1] = "X"
+                break
+            elif chc1 == "MR":
+                if midr[2] == "X" or midr[2] == "O":
+                    print("That space is already taken! Please try again.")
+                    continue
+                midr[2] = "X"
+                break
+            elif chc1 == "BL":
+                if botr[0] == "X" or botr[0] == "O":
+                    print("That space is already taken! Please try again.")
+                    continue
+                botr[0] = "X"
+                break
+            elif chc1 == "BM":
+                if botr[1] == "X" or botr[1] == "O":
+                    print("That space is already taken! Please try again.")
+                    continue
+                botr[1] = "X"
+                break
+            elif chc1 == "BR":
+                if botr[2] == "X" or botr[2] == "O":
+                    print("That space is already taken! Please try again.")
+                    continue
+                botr[2] = "X"
+                break
+            else:
+                print("Error. Invalid input. Please restart the game and try again!")
+                break
+        else:
+            print("Invalid Option: Please try again.")
+        continue
+
+def win_check():
+    # Check for wins horizontally
+    if topr[0] == "X" and topr[1] == "X" and topr[2] == "X":
+        return True
+    elif midr[0] == "X" and midr[1] == "X" and midr[2] == "X":
+        return True
+    elif botr[0] == "X" and botr[1] == "X" and botr[2] == "X":
+        return True
+    # Check for wins vertically
+    if topr[0] == "X" and midr[0] == "X" and botr[0] == "X":
+        return True
+    elif topr[1] == "X" and midr[1] == "X" and botr[1] == "X":
+        return True
+    elif topr[2] == "X" and midr[2] == "X" and botr[2] == "X":
+        return True
+    # Check for wins diagonally
+    if topr[0] == "X" and midr[1] == "X" and botr[2] == "X":
+        return True
+    elif topr[2] == "X" and midr[1] == "X" and botr[0] === "X":
+        return True
+    return False
+
+def loss_check():
+    # Check for losses horizontally
+    if topr[0] == "O" and topr[1] == "O" and topr[2] == "O":
+        return True
+    elif midr[0] == "O" and midr[1] == "O" and midr[2] == "O":
+        return True
+    elif botr[0] == "O" and botr[1] == "O" and botr[2] == "O":
+        return True
+    # Check for losses vertically
+    if topr[0] == "O" and midr[0] == "O" and botr[0] == "O":
+        return True
+    elif topr[1] == "O" and midr[1] == "O" and botr[1] == "O":
+        return True
+    elif topr[2] == "O" and midr[2] == "O" and botr[2] == "O":
+        return True
+    # Check for losses diagonally
+    if topr[0] == "O" and midr[1] == "O" and botr[2] == "O":
+        return True
+    elif topr[2] == "O" and midr[1] == "O" and botr[0] === "O":
+        return True
+    return False
 
 
+                                                      
+        
             
