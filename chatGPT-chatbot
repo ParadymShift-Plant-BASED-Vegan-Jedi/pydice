@@ -1,0 +1,92 @@
+import tensorflow as tf
+import numpy as np
+import random
+
+# Define some responses
+responses = {
+    "greeting": ["Hello!", "Hi there!", "Hey!"],
+    "introduction": ["My name is Chatbot. What's yours?", "I'm Chatbot. What should I call you?"],
+    "goodbye": ["Goodbye!", "Bye!", "See you later!"],
+    "thanks": ["You're welcome!", "No problem.", "Anytime!"],
+    "unknown": ["I'm sorry, I don't understand.", "Can you please rephrase that?", "I'm not sure what you mean."]
+}
+
+# Define the training data
+training_data = [
+    ("Hi", "greeting"),
+    ("Hello", "greeting"),
+    ("What's up?", "greeting"),
+    ("My name is Tom.", "introduction"),
+    ("I'm Sarah.", "introduction"),
+    ("Nice to meet you.", "introduction"),
+    ("Thanks", "thanks"),
+    ("Thank you", "thanks"),
+    ("Bye", "goodbye"),
+    ("See you later", "goodbye"),
+    ("Goodbye", "goodbye")
+]
+
+# Define the main function
+def chatbot():
+    # Define the vocabulary
+    vocabulary = set()
+    for sentence, label in training_data:
+        for word in sentence.split():
+            vocabulary.add(word)
+    vocabulary = list(vocabulary)
+    vocabulary_size = len(vocabulary)
+
+    # Define the labels
+    label_vocabulary = set()
+    for sentence, label in training_data:
+        label_vocabulary.add(label)
+    label_vocabulary = list(label_vocabulary)
+    num_classes = len(label_vocabulary)
+
+    # Create the training data
+    X_train = []
+    y_train = []
+    for sentence, label in training_data:
+        X = [0] * vocabulary_size
+        for word in sentence.split():
+            if word in vocabulary:
+                X[vocabulary.index(word)] = 1
+        X_train.append(X)
+        y = [0] * num_classes
+        y[label_vocabulary.index(label)] = 1
+        y_train.append(y)
+
+    # Define the neural network model
+    model = tf.keras.Sequential([
+        tf.keras.layers.Dense(8, input_dim=vocabulary_size, activation="relu"),
+        tf.keras.layers.Dense(8, activation="relu"),
+        tf.keras.layers.Dense(num_classes, activation="softmax")
+    ])
+    model.compile(loss="categorical_crossentropy", optimizer="adam", metrics=["accuracy"])
+
+    # Train the model
+    model.fit(np.array(X_train), np.array(y_train), epochs=1000, verbose=0)
+
+    # Start the chatbot
+    print(random.choice(responses["greeting"]))
+    print(random.choice(responses["introduction"]))
+    name = input()
+
+    while True:
+        message = input().lower()
+        X = [0] * vocabulary_size
+        for word in message.split():
+            if word in vocabulary:
+                X[vocabulary.index(word)] = 1
+        y = model.predict(np.array([X]))
+        label = label_vocabulary[np.argmax(y)]
+        if label == "goodbye":
+            print(random.choice(responses["goodbye"]))
+            break
+        elif label == "thanks":
+            print(random.choice(responses["thanks"]))
+        else:
+            print(random.choice(responses["unknown"]))
+
+# Start the chatbot
+chatbot()
