@@ -29,13 +29,21 @@ def check_all_messages(message):
         highest_prob_list[bot_response] = message_probability(message, list_of_words, single_response, required_words)
         
     response('Hello!', ['hello', 'hi', 'sup', 'hey', 'heyo'], single_response=True)
-    response("I'm doing fine, and you?', ['how', 'are' 'you', 'doing'], required_words=['how'])
-    response('Thank you!', 'i', 'love', 'chatbot'], required_words=['chatbot'])
-             
+    response("I'm doing fine, and you?", ['how', 'are' 'you', 'doing'], required_words=['how', 'you'])
+    response("You're so welcome! Happy to help.", ['thank you', 'i', 'love', 'chatbot'], required_words=['thank you'])
+    
+    response("That's so good to hear!", ["i'm", "fine", "good", "well"], required_words=["i'm"])
+    response("You can call me Chatbot.", ['what', 'your', 'name', 'who', 'are', 'you'])
+    
+    response(long.capabilities, ['what', 'can', 'you', 'do'], required_words=["what", 'you', 'do'])       
     response(long.R_EATING, ['what', 'you', 'eat'], required_words=['you', 'eat'])
+    response(long.whoisparadym, ['who', 'is', "who's", 'paradymshift'], required_words=['who', 'paradymshift'])
+    response(long.contactparadym, ['how', 'contact', 'paradym', 'ahold'], required_words=['paradymshift', 'contact'])
+    response(long.botbirth, ['how', 'old', 'are', 'you', 'when', 'born', 'age'], required_words=['old', 'you'])
+    response(long.paradymage, ['how', 'old', 'paradym', 'what', 'age'], required_words=['paradymshift', 'old'])
              
     best_match = max(highest_prob_list, key=highest_prob_list.get)
-    # print(highest_prob_list)
+    print(highest_prob_list)
              
     return long.unknown() if highest_prob_list[best_match] < 1 else best_match
 
@@ -44,5 +52,5 @@ def get_response(user_input):
     response = check_all_messages(split_message)
     return response
 
-While True:
+while True:
     print('Chatbot: ' + get_response(input('Your input: ')))
