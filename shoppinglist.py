@@ -18,8 +18,11 @@ while True:
     elif userprompt == "listadd" or userprompt == "la":
         litem = input("Please enter your list item here: ")
         litem = litem.strip()
-        thelist.append(litem)
-        print(f'Item "{litem}" added.')
+        if litem not in thelist:
+            thelist.append(litem)
+            print(f'Item "{litem}" added.')
+        else:
+            print("This item is already added to your shopping list!")
     elif userprompt == "listremove" or userprompt == "lr":
         ritem = input("Please enter the bought item here: ")
         ritem = ritem.strip()
@@ -41,24 +44,13 @@ while True:
                 decision = decision.lower()
                 decision = decision.strip()
                 if decision == "yes" or decision == "y":
-                    print(keys_sorted_by_count[index + 1])
+                    try:
+                        print(keys_sorted_by_count[index + 1])
+                    except:
+                        print("No more suggestions.")
+                        break
+                    index = index + 1
                 elif decision == "no" or decision == "n":
                     break
-            """
-            largest_val = 0
-            best_suggestion = None
-            for suggestion, count in suggestions.items():
-                if count > largest_val:
-                    largest_val = count
-                    best_suggestion = suggestion
-            print(best_suggestion)
-            while True:
-                decision = input("Would you like another suggestion? Type y/n: ")
-                decision = decision.lower()
-                decision = decision.strip()
-                if decision == "yes" or decision == "y":
-                    sugglist = []
-                    for sugg, num in suggestions.items():
-            """
     else:
         print("Error. Command not recognized.")
