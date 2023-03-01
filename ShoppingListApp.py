@@ -7,6 +7,8 @@ from kivy.uix.textinput import TextInput
 
 class ShoppingList(App):
     def build(self):
+        self.thelist = []
+        self.suggestions = {}
         self.window = GridLayout()
         self.window.cols = 1
         self.window.size_hint = (0.6, 0.7)
@@ -46,9 +48,25 @@ viewcommands or vc: Show this list of commands""",
         self.window.add_widget(self.button)
 
         return self.window
+    
+    def additem(self, instance):
+        self.thelist.append(self.userinput.text)
+        self.intro.text = f'Item "{self.userinput.text}" added to shopping list.'
+        self.button.bind(on_press=self.callback)
 
     def callback(self, instance):
-        self.intro.text = "Test Complete."
+        self.userinput.text = self.userinput.text.lower()
+        self.userinput.text = self.userinput.text.strip()
+        if self.userinput.text == "lv" or self.userinput.text == "listview":
+            if self.thelist == []:
+                self.intro.text = "There are no items in your list. \nAdd new items with the `la` command."
+            else:
+                for item in self.thelist:
+                    self.intro.text = f"- {item}"
+        elif self.userinput.text == "la" or self.userinput.text == "listadd":
+            self.intro.text = "Type the item you would like to add."
+            self.button.bind(on_press=self.additem)
+            
 
 
 
