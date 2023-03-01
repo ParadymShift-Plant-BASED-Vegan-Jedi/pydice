@@ -50,9 +50,28 @@ viewcommands or vc: Show this list of commands""",
         return self.window
     
     def additem(self, instance):
-        self.thelist.append(self.userinput.text)
-        self.intro.text = f'Item "{self.userinput.text}" added to shopping list.'
-        self.button.bind(on_press=self.callback)
+        self.userinput.text = self.userinput.text.strip()
+        if self.userinput.text not in self.thelist:
+            self.thelist.append(self.userinput.text)
+            self.intro.text = f'Item "{self.userinput.text}" added to shopping list.'
+            self.button.unbind(on_press=self.additem)
+            self.button.bind(on_press=self.callback)
+        else:
+            self.intro.text = "That item is already in your list!"
+            self.button.unbind(on_press=self.additem)
+            self.button.bind(on_press=self.callback)
+    
+    def removeitem(self, instance):
+        if self.userinput.text in self.thelist:
+            self.thelist.remove(self.userinput.text)
+            self.intro.text = f'Item "{self.userinput.text}" removed from shopping list.'
+            self.suggestions[self.userinput.text] = self.suggestions.get(self.userinput.text, 0) + 1
+            self.button.unbind(on_press=self.removeitem)
+            self.button.bind(on_press=self.callback)
+        else:
+            self.intro.text = "Sorry, we could not find that item in your list! \nPlease check spelling/capitalization and try again"
+            self.button.unbind(on_press=self.removeitem)
+            self.button.bind(on_press=self.callback)
 
     def callback(self, instance):
         self.userinput.text = self.userinput.text.lower()
@@ -61,11 +80,15 @@ viewcommands or vc: Show this list of commands""",
             if self.thelist == []:
                 self.intro.text = "There are no items in your list. \nAdd new items with the `la` command."
             else:
+                self.intro.text = ""
                 for item in self.thelist:
-                    self.intro.text = f"- {item}"
+                    self.intro.text += f"- {item}\n"
         elif self.userinput.text == "la" or self.userinput.text == "listadd":
             self.intro.text = "Type the item you would like to add."
             self.button.bind(on_press=self.additem)
+        elif self.userinput.text == "lr" or self.userinput.text == "listremove":
+            self.intro.text = "Type the item you would like to remove."
+            self.button.bind(on_press=self.removeitem)
             
 
 
