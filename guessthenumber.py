@@ -6,9 +6,9 @@ The game is simple, you tell the computer how many numbers you'd like to guess, 
 
 If you guess too high, the computer will tell you so. If you guess too low, the computer will also let you know. 
 
-Can you guess the rigth number? 
+Can you guess the right number? 
 
-Be careful; you only have 6 tries!""")
+Be careful; you have a limited number of guesses!""")
 
 while True:
     try:
@@ -35,6 +35,33 @@ while True:
         print("You cannot guess a number lower than 1. Try again.")
         continue
     else:
+        tries -= 1
         break
-
+        
 while True:
+    if ans > num:
+        print("You guessed too high! Guess again.")
+    elif ans < num:
+        print("You guessed too low! Guess again.")
+    elif ans == num:
+        print("Congatulations. You guessed correctly and won!")
+        break
+    else:
+        print("Unknown error. Please restart game.")
+        break
+    while tries > 0:
+        try:
+            ans = int(input("What number am I thinking of? Guess here: "))
+        except:
+            print("Invalid entry. Please try again.")
+            continue
+        if ans < 1:
+            print("You cannot guess a number lower than 1. Try again.")
+            continue
+        else:
+            tries -= 1
+            break
+    if tries < 1:
+        print("Sorry, you ran out of guesses and lost. Better luck next time!")
+        break
+    
