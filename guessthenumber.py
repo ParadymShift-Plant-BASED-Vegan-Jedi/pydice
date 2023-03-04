@@ -26,25 +26,25 @@ num = random.choice(nums)
 if x + 1 < 22:
     tries = 4
 elif x < 201:
-    tries = 6
+    tries = 5
 elif x < 801:
-    tries = 8
+    tries = 6
 elif x < 2001:
-    tries = 10
+    tries = 8
 elif x < 8001:
-    tries = 13
+    tries = 11
 elif x < 15001:
-    tries = 15
+    tries = 13
 elif x < 25001:
-    tries = 18
+    tries = 16
 elif x < 75001:
-    tries = 21
+    tries = 19
 elif x < 100001:
-    tries = 25
+    tries = 23
 elif x < 500001:
-    tries = 30
+    tries = 28
 else:
-    tries = 35
+    tries = 33
     
 
 while True:
