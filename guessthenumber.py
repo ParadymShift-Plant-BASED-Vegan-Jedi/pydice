@@ -23,7 +23,29 @@ while True:
 
 nums = [i for i in range(1, x + 1)]
 num = random.choice(nums)
-tries = 6
+if x + 1 < 22:
+    tries = 4
+elif x < 201:
+    tries = 6
+elif x < 801:
+    tries = 8
+elif x < 2001:
+    tries = 10
+elif x < 8001:
+    tries = 13
+elif x < 15001:
+    tries = 15
+elif x < 25001:
+    tries = 18
+elif x < 75001:
+    tries = 21
+elif x < 100001:
+    tries = 25
+elif x < 500001:
+    tries = 30
+else:
+    tries = 35
+    
 
 while True:
     try:
