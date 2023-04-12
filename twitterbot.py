@@ -10,4 +10,6 @@ client = tw.Client(bearer_token, api_key, api_secret, access_token, access_token
 auth = tw.OAuth1UserHandler(api_key, api_secret, access_token, access_token_secret)
 api = tw.API(auth)
 
-client.create_tweet(text = "Hello Vegans!")
+# client.create_tweet(text = "Hello Vegans!")
+
+client.like("1645967924782571520")
