@@ -12,4 +12,6 @@ api = tw.API(auth)
 
 # client.create_tweet(text = "Hello Vegans!")
 
-client.like("1645967924782571520")
+# DIDNT WORK client.like("1645967924782571520")
+
+client.retweet("1645967924782571520")
