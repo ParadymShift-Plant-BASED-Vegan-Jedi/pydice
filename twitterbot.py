@@ -6,5 +6,8 @@ bearer_token = r"AAAAAAAAAAAAAAAAAAAAAHWlmgEAAAAAxn2OlnDnCFPbrnY3abSy%2FEP6gA0%3
 access_token = "1645947217050746880-LEtnRBszyUH2rmCGn9X8GRVzy5VErT"
 access_token_secret = "HJuLgF1qhmRkXxg4XXGMsUoPYEsQnxJulT0Fa3NG22Oda"
 
-client = tw.client(bearer_token, api_key, api_secret, access_token, access_token_secret)
+client = tw.Client(bearer_token, api_key, api_secret, access_token, access_token_secret)
 auth = tw.OAuth1UserHandler(api_key, api_secret, access_token, access_token_secret)
+api = tw.API(auth)
+
+client.create_tweet(text = "Hello Vegans!")
