@@ -14,7 +14,7 @@ api = tw.API(auth)
 
 # DIDNT WORK client.like("1645967924782571520")
 
-client.retweet("1645967924782571520", user_auth = True)
+# ALSO DIDNT WORK client.retweet("1645967924782571520")
 
 # client.create_tweet(in_reply_to_tweet_id = "1645967924782571520", text = "Keep being the awesome vegans that you are!")
 
