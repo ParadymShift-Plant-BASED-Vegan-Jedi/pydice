@@ -14,9 +14,11 @@ api = tw.API(auth)
 
 # DIDNT WORK client.like("1645967924782571520")
 
-client.retweet("1645967924782571520")
+# ALSO DIDNT WORK client.retweet("1645967924782571520")
 
 # client.create_tweet(in_reply_to_tweet_id = "1645967924782571520", text = "Keep being the awesome vegans that you are!")
 
-# for tweet in api.home_timeline():
-#    print(tweet.text)
+timeline = api.home_timeline()
+
+for tweet in timeline:
+    api.retweet(tweet.id)
